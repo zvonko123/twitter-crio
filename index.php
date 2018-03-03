@@ -10,13 +10,24 @@ $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
 
 
 $mainWindow = '<div id="mainwindow">enter username u want to check followers of</div>';
-$pickUsernameForm = '<form id="pickUsernameForm">
-            <input id="username">Username</input>
+$pickUsernameForm = '<form method="post" id="pickUsernameForm">
+            <input type="text" name="username" value="_horazon_"></input>
+            <input type="submit" value="go!">
             </form>';
 echo $mainWindow;
 echo $pickUsernameForm;
 
 //make a connection (authenticate) with twitter
 $connection = new TwitterOAuth($CONSUMER_KEY, $CONSUMER_SECRET, $ACCESS_TOKEN, $ACCESS_SECRET);
+
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+
+  if (isset($_POST['username'])){
+    $usernamePicked = $_POST['username'];
+    $followersList = $connection->get('followers/list',array('screen_name' => $usernamePicked )); //'cursor' => $cursor_value
+    var_dump($followersList);
+    }
+}
 
 ?>
