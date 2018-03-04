@@ -22,12 +22,32 @@ $connection = new TwitterOAuth($CONSUMER_KEY, $CONSUMER_SECRET, $ACCESS_TOKEN, $
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-
+  //we need to clean this
   if (isset($_POST['username'])){
     $usernamePicked = $_POST['username'];
     $followersList = $connection->get('followers/list',array('screen_name' => $usernamePicked )); //'cursor' => $cursor_value
-    var_dump($followersList);
+    $IdsAndUsernames = array();
+
+    $followersList = get_object_vars($followersList);
+    foreach ($followersList['users'] as $key => $value)
+    {
+      $user = get_object_vars($value);
+      print_r($user['screen_name'] . '<br>');
     }
 }
+}
+  //  var_dump(json_decode($followersList->users[0]));
+
+
+
+function objectToArray( $data )
+{
+    if ( is_object( $data ) )
+        {
+          $d = get_object_vars( $data );
+          return $d;
+          }
+}
+
 
 ?>
