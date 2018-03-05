@@ -8,10 +8,6 @@ $CONSUMER_SECRET ="OmT4AY7fzRZlQGQWvnwMTQeYusMs0axJVvLt8KZnLfP3SC62aT";
 $ACCESS_TOKEN = "179333574-ZbVWfe5F3TxMCXdpj6cOwZ3ZhKb3FxdHdu1AoDd9";
 $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
 
-
-
-
-
     $usernameFromConfig = file_get_contents("usernameToCheck.json");
     $usernameFromConfig = json_decode($usernameFromConfig, true);
     $usernameFromConfig = $usernameFromConfig['username'];
@@ -28,14 +24,19 @@ $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
        $followersHandles[] = $user['screen_name'];
        //print_r($user['screen_name'] . '<br>');
      }
-     //we also need to check for db non followers;
-
 
      $dbHandlesAndStatuses = file_get_contents("baza.json");
      $dbHandlesAndStatuses = json_decode($dbHandlesAndStatuses,true);
 
+     //follow or nofollow logic is done with intersect and array_diff
+    $followersStillFollowing = array_intersect(array_keys($dbHandlesAndStatuses),$followersHandles);
+    $followersNotFollowingAnymore = array_diff(array_keys($dbHandlesAndStatuses), $followersStillFollowing);
+
+    //
 
      //debug
+     var_dump($followersStillFollowing);
+     var_dump($followersNotFollowingAnymore);
      var_dump($dbHandlesAndStatuses);
      var_dump($followersHandles);
  ?>
