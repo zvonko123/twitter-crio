@@ -47,9 +47,9 @@ $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
     file_put_contents('baza.json', $freshDbEncoded);
 
      //debug
-      var_dump($freshDb);
-      var_dump($followersStillFollowing);
-      var_dump($followersNotFollowingAnymore);
-      var_dump($dbHandlesAndStatuses);
-      var_dump($followersHandles);
+      //var_dump($freshDb);
+      // var_dump($followersStillFollowing);
+      // var_dump($followersNotFollowingAnymore);
+      // var_dump($dbHandlesAndStatuses);
+      // var_dump($followersHandles);
  ?>
