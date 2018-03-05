@@ -32,11 +32,24 @@ $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
     $followersStillFollowing = array_intersect(array_keys($dbHandlesAndStatuses),$followersHandles);
     $followersNotFollowingAnymore = array_diff(array_keys($dbHandlesAndStatuses), $followersStillFollowing);
 
-    //
+    //update the json database file logic
+    $freshDb= array();
+    foreach ($dbHandlesAndStatuses as $userHandle => $followStatus) {
+      if (in_array($userHandle,$followersNotFollowingAnymore)){
+          $followStatus = 0;
+      }
+      else {
+        $followStatus = 1;
+      }
+      $freshDb[$userHandle] = $followStatus;
+    }
+    $freshDbEncoded = json_encode($freshDb);
+    file_put_contents('baza.json', $freshDbEncoded);
 
      //debug
-     var_dump($followersStillFollowing);
-     var_dump($followersNotFollowingAnymore);
-     var_dump($dbHandlesAndStatuses);
-     var_dump($followersHandles);
+      var_dump($freshDb);
+      var_dump($followersStillFollowing);
+      var_dump($followersNotFollowingAnymore);
+      var_dump($dbHandlesAndStatuses);
+      var_dump($followersHandles);
  ?>
