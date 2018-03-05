@@ -28,6 +28,14 @@ $ACCESS_SECRET = "xq0Q2h5bbOtyteG4d89LraUukhYThzMQ0v7qeUM9QGgs7";
        $followersHandles[] = $user['screen_name'];
        //print_r($user['screen_name'] . '<br>');
      }
+     //we also need to check for db non followers;
 
+
+     $dbHandlesAndStatuses = file_get_contents("baza.json");
+     $dbHandlesAndStatuses = json_decode($dbHandlesAndStatuses,true);
+
+
+     //debug
+     var_dump($dbHandlesAndStatuses);
      var_dump($followersHandles);
  ?>
